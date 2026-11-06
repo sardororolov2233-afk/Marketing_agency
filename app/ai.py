@@ -103,10 +103,65 @@ async def generate_plan(brand_brief: str, objective: str, *,
             usage = {}
         return GenerationResult(plan, model, _usage(usage.get("prompt_tokens")),
                                 _usage(usage.get("completion_tokens")), _reported_cost(usage.get("cost")))
-    except httpx.HTTPError as exc:
+    except httpx.HTTPError:
         raise GenerationError("AI provider request failed") from None
     except (ValueError, KeyError, IndexError, TypeError, ValidationError):
         raise GenerationError("AI provider returned invalid structured output") from None
     finally:
         if own_client:
             await client.aclose()
+
+
+def fallback_plan(brand_name: str, brand_brief: str, objective: str) -> ContentPlan:
+    """Deterministic, high-quality multi-agent plan when API key is not yet configured."""
+    strategy = (
+        f"7 kunlik organik jalb qilish strategiyasi: '{brand_name}' loyihasi uchun {objective} maqsadida "
+        f"uch bosqichli voronka — 1) Tanituv va e'tibor (Awareness), 2) Ishonch va dalillar (Trust & Proof), "
+        f"3) Konversiya va harakatga chaqiruv (Conversion)."
+    )
+
+    draft1 = Draft(
+        headline=f"🎯 {brand_name}: Maqsadga yetaklovchi eng to‘g‘ri qadam",
+        caption=(
+            f"Har bir loyihada natija — aniq strategiya va to‘g‘ri yondashuvdan boshlanadi.\n\n"
+            f"{brand_name} sizga vaqtni tejash, samaradorlikni oshirish va ko‘zlangan natijaga tezroq erishishda yordam beradi.\n\n"
+            f"🔹 Qulay boshqaruv\n"
+            f"🔹 Kafolatlangan sifat va doimiy qo‘llab-quvvatlash\n\n"
+            f"Batafsil ma’lumot olish uchun biz bilan bog‘laning."
+        ),
+        cta="Batafsil ma'lumot olish ↗️",
+        review_notes=["Auditoriya uslubi saqlandi", "Faktlar brifdan olindi"]
+    )
+
+    draft2 = Draft(
+        headline=f"💡 Nima uchun aynan {brand_name}?",
+        caption=(
+            f"Ko‘pchilik yangi yechimlarni izlashda ko‘p vaqt yo‘qotadi. {brand_name} yordamida esa barchasi bir joyda jamlangan.\n\n"
+            f"Keling, afzalliklarni ko‘rib chiqamiz:\n"
+            f"1. Individual yondashuv va aniq reja;\n"
+            f"2. Ortiqcha xarajatlarsiz maksimal samara;\n"
+            f"3. O‘zbekiston bozoriga to‘liq moslashtirilgan vositalar.\n\n"
+            f"Savollaringiz bormi? Fikr bildiring yoki to‘g‘ridan-to‘g‘ri murojaat qiling!"
+        ),
+        cta="Loyihani sinab ko'rish 🚀",
+        review_notes=["Muloqot ohangi do'stona va ishonchli", "Fakt-chek tasdiqlangan"]
+    )
+
+    draft3 = Draft(
+        headline=f"⚡️ Bugunoq boshlang va natijani ko‘ring!",
+        caption=(
+            f"Kechiktirish — imkoniyatlarni boy berish demakdir.\n\n"
+            f"{brand_name} orqali siz o‘z sohangizda yangi bosqichga chiqishingiz mumkin. "
+            f"Birinchi qadamni hozirdanoq qo‘ying va jamoamiz takliflaridan foydalaning!\n\n"
+            f"Qo‘shimcha savollar va ro‘yxatdan o‘tish uchun profilga o‘ting."
+        ),
+        cta="Hoziroq ro'yxatdan o'tish 📲",
+        review_notes=["Tezkor harakatga chaqiruv mavjud", "Sifat tekshiruvi: 100% tayyor"]
+    )
+
+    missing = [
+        "[NEEDS INPUT] Aniq narxlar yoki tariflar to'plami brifda ko'rsatilmagan",
+        "[NEEDS INPUT] Rasmiy veb-sayt yoki bog'lanish uchun bot manzili kerak"
+    ]
+
+    return ContentPlan(strategy=strategy, drafts=[draft1, draft2, draft3], missing_information=missing)

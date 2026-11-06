@@ -7,3 +7,6 @@ __pycache__/
 !.env.example
 *.db
 *.sqlite3
+.vercel
+.env*
+saas-marketing-agents/

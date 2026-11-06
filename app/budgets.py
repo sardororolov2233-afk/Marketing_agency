@@ -26,7 +26,7 @@ class BudgetInput(BaseModel):
 
 def seed_initial_budget(db: Session, project: Project) -> None:
     """Called in the transaction creating each of the three initial projects."""
-    if project.slug in {"tamaddun", "uc-chi", "uytor"}:
+    if project.slug in {"oqi", "yordamchi-ai", "tamaddun", "uc-chi", "uytor"}:
         db.add(ProjectBudget(project_id=project.id, monthly_limit_cents=3000))
 
 

@@ -52,7 +52,7 @@ def test_auth_and_tenant_isolation(service):
     owner_headers = {'Authorization': 'Bearer ' + r.json()['access_token']}
     projects = client.get('/api/v1/projects', headers=owner_headers).json()
     assert len(projects) == 3
-    assert {p['name'] for p in projects} == {'Tamaddun', 'UC chi', 'UyTor'}
+    assert {p['name'] for p in projects} == {'Tamaddun', 'O‘qi', 'Yordamchi AI'}
     for project in projects:
         budget = client.get(f"/api/v1/projects/{project['id']}/budget", headers=owner_headers).json()
         assert budget['monthly_limit_cents'] == 3000

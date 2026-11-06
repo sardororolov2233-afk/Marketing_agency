@@ -105,9 +105,9 @@ def telegram_auth(data: AuthRequest, db: DB):
         db.add(user)
         db.flush()
         for slug, name, description, audience in [
+            ("oqi", "O‘qi", "Ta'lim platformasi va onlayn kurslar orqali yangi kasblarni o'rgatish.", "Yoshlar va talabalar"),
+            ("yordamchi-ai", "Yordamchi AI", "Kichik va o‘rta bizneslar uchun sun'iy intellekt yordamchisi va avtomatlashtirish.", "Tadbirkorlar"),
             ("tamaddun", "Tamaddun", "Talabalarga maqola yozish bo‘yicha xizmat taklifini takomillashtirish.", "Talabalar"),
-            ("uc-chi", "UC chi", "O‘yin valyutalarini sotish xizmati.", ""),
-            ("uytor", "UyTor", "Uy-joylarni reklama qiluvchi platformada foydalanuvchilar sonini oshirish.", ""),
         ]:
             project = Project(name=name, slug=slug, owner_id=user.id)
             db.add(project)

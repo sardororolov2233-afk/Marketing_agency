@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/index.py?path=api/:path*"
+    },
+    {
+      "source": "/health/:path*",
+      "destination": "/api/index.py?path=health/:path*"
+    },
+    {
+      "source": "/docs",
+      "destination": "/api/index.py?path=docs"
+    },
+    {
+      "source": "/openapi.json",
+      "destination": "/api/index.py?path=openapi.json"
+    }
+  ]
+}

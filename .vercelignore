@@ -1,0 +1,11 @@
+.venv
+.git
+.pytest_cache
+marketingagenc_bot
+marketing.db
+marketing.db-journal
+tests
+__pycache__
+*.pyc
+.env
+saas-marketing-agents
