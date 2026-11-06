@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>AMA · Marketing studiyasi</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="header">
+      <a class="brand" href="/" aria-label="AMA bosh sahifa"><span class="brand-mark">a.</span><span>AMA <small>marketing studiyasi</small></span></a>
+      <span class="header-label">ISH MAYDONI</span>
+    </header>
+    <section class="intro">
+      <div><div class="eyebrow"><span></span> SIZNING MARKETING JAMOANGIZ</div><h1>G‘oyalardan <em>o‘sish sari.</em></h1><p>Loyihalaringizning briflarini bir joyda boshqaring.</p></div>
+      <div class="intro-badge" aria-hidden="true">✳</div>
+    </section>
+    <div id="notice" class="notice" role="status" aria-live="polite">Telegram orqali kirish tekshirilmoqda…</div>
+    <div id="workspace" hidden>
+      <div class="section-head"><div><div class="eyebrow">ISH MAYDONI / 01</div><h2>Loyihalar</h2><p>Brifni to‘ldirish uchun loyihani tanlang.</p></div><span id="project-count" class="count"></span></div>
+      <div id="project-list" class="project-grid"></div>
+      <section id="brand-panel" class="panel" hidden aria-labelledby="brand-title">
+        <div class="panel-heading"><div><div class="eyebrow">LOYIHA BRIFI / 02</div><h2 id="brand-title"></h2><p>Bu ma’lumotlar loyiha kontekstini shakllantiradi.</p></div><span id="project-role" class="role"></span></div>
+        <form id="brand-form">
+          <label>Mahsulot va xizmat <textarea name="description" rows="3" maxlength="10000" placeholder="Loyiha nima taklif qiladi?"></textarea></label>
+          <div class="two-col"><label>Maqsadli auditoriya<textarea name="audience" rows="3" maxlength="5000" placeholder="Kimlarga yordam berasiz?"></textarea></label><label>Muloqot uslubi<textarea name="tone" rows="3" maxlength="5000" placeholder="Masalan, samimiy va aniq"></textarea></label></div>
+          <div class="two-col"><label>Til<input name="language" required maxlength="20" placeholder="uz"></label><label>Cheklovlar va muhim izohlar<textarea name="constraints" rows="2" maxlength="5000" placeholder="Nimalarga e’tibor berish kerak?"></textarea></label></div>
+          <div class="form-footer"><p id="form-status" role="status" aria-live="polite"></p><button id="save-button" class="primary" type="submit">Brifni saqlash <span>↗</span></button></div>
+        </form>
+      </section>
+      <section id="content-panel" class="panel" hidden aria-labelledby="content-title">
+        <div class="panel-heading"><div><div class="eyebrow">KONTENT / 03</div><h2 id="content-title">Kontent qoralamalari</h2><p>Matn yarating, tekshiruvga yuboring va aniq versiyani tasdiqlang.</p></div></div>
+        <form id="draft-form"><label>Yangi Telegram posti<textarea name="body" rows="4" maxlength="10000" required placeholder="Post matnini kiriting"></textarea></label><div class="form-footer"><p id="draft-status" role="status" aria-live="polite"></p><button class="primary" type="submit">Qoralama yaratish <span>↗</span></button></div></form>
+        <div id="content-list" class="content-list"></div>
+      </section>
+      <aside class="roadmap"><span class="roadmap-icon">✳</span><div><strong>Keyingi qadam</strong><p>AI generatsiyasi va Telegram kanaliga nashr qilish imkoniyatlari ishlab chiqilmoqda.</p></div></aside>
+    </div>
+    <footer>AMA <span>·</span> HAR BIR G‘OYA MUHIM</footer>
+  </main>
+</body>
+</html>
